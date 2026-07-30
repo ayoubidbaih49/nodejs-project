@@ -18,6 +18,7 @@ const pool = new Pool({
 //     const client_id = req.params.client_id;
 //     const result = await pool.query("SELECT * FROM clients where client_id >20");
 //     [client_id]
+
 //     res.json(result.rows);
 // });
 // app.get("/clients", async (req, res) => {
