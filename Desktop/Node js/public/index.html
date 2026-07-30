@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Client Search</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            width: 700px;
+            margin: 40px auto;
+        }
+
+        input {
+            width: 250px;
+            padding: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        td,
+        th {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        th {
+            background: #3498db;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Search Client</h2>
+
+    <input id="cin" placeholder="Enter Client ID">
+
+    <button onclick="searchClient()">
+        Search
+    </button>
+
+    <table id="table">
+        <thead>
+            <tr>
+                <th>Client ID</th>
+                <th>Name</th>
+                <th>Telephone</th>
+                <th>City</th>
+            </tr>
+        </thead>
+
+        <tbody id="result">
+
+        </tbody>
+    </table>
+
+    <script>
+
+        async function searchClient() {
+
+            const cin = document.getElementById("cin").value;
+
+
+            const response = await fetch("/search?client_id=" + cin);
+
+            const data = await response.json();
+
+            let html = "";
+
+            data.forEach(client => {
+
+                html += `
+        <tr>
+            <td>${client.client_id}</td>
+            <td>${client.nom}</td>
+            <td>${client.telephone}</td>
+            <td>${client.ville}</td>
+        </tr>
+        `;
+
+            });
+
+            document.getElementById("result").innerHTML = html;
+        }
+
+    </script>
+
+</body>
+
+</html>
